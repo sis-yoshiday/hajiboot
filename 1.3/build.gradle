@@ -1,0 +1,32 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.springframework:springloaded:1.2.1.RELEASE'
+  }
+}
+
+apply plugin: 'idea'
+
+idea {
+  module {
+    inheritOutputDirs = false
+    outputDir = file("$buildDir/classes/main/")
+  }
+}
+
+apply plugin: 'spring-boot'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+dependencies {
+
+  compile 'org.springframework.boot:spring-boot-parent:1.2.1.RELEASE'
+  compile 'org.springframework.boot:spring-boot-starter-web:1.2.1.RELEASE'
+  testCompile 'org.springframework.boot:spring-boot-starter-test:1.2.1.RELEASE'
+}
