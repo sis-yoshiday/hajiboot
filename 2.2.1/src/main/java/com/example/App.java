@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.domain.Customer;
+import com.example.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +15,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
  */
 @SpringBootApplication public class App implements CommandLineRunner {
 
-  @Autowired NamedParameterJdbcTemplate jdbcTemplate;
+  @Autowired CustomerRepository repository;
 
   public static void main(String[] args) {
     SpringApplication.run(App.class, args);
@@ -22,12 +23,9 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
   @Override public void run(String... args) throws Exception {
 
-    String sql = "select id, first_name, last_name from customers where id = :id";
-    SqlParameterSource param = new MapSqlParameterSource().addValue("id", 1);
-    Customer result = jdbcTemplate.queryForObject(sql, param,
-        (rs, rowNum) -> new Customer(rs.getInt("id"), rs.getString("first_name"),
-            rs.getString("last_name")));
+    Customer created = repository.save(new Customer(null, "Hidetoshi", "Dekisugi"));
+    System.out.println(created + " is created!");
 
-    System.out.println("result = " + result);
+    repository.findAll().forEach(System.out::println);
   }
 }
