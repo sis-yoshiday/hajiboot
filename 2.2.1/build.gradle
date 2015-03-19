@@ -25,10 +25,6 @@ idea {
 
 apply plugin: 'spring-boot'
 
-bootRun {
-  standardInput = System.in
-}
-
 repositories {
   mavenLocal()
   mavenCentral()
