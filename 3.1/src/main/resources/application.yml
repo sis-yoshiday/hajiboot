@@ -5,3 +5,5 @@ spring:
     url: jdbc:h2:file:~/tmp/testdb
     username: sa
     password:
+  thymeleaf:
+    cache: false
